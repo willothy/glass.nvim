@@ -1,0 +1,32 @@
+---
+base: lua51
+
+globals:
+  vim:
+    any: true
+  executor:
+    any: true
+  coroutine:
+    any: true
+  coroutine.isyieldable:
+    any: true
+
+  assert:
+    args:
+      - type: bool
+      - type: string
+        required: false
+  after_each:
+    args:
+      - type: function
+  before_each:
+    args:
+      - type: function
+  describe:
+    args:
+      - type: string
+      - type: function
+  it:
+    args:
+      - type: string
+      - type: function
