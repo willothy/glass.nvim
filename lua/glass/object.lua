@@ -1,17 +1,34 @@
 local M = {}
 
-function M.class(name, super)
+function M.class(name, ...)
   local cls = {}
   cls.__name = name
-  cls.__super = super
+  cls.__super = setmetatable({ ... }, {
+    __index = function(supers, k)
+      for _, super in ipairs(supers) do
+        if super[k] then return super[k] end
+      end
+    end,
+  })
   cls.__index = cls
-  if super then setmetatable(cls, { __index = super }) end
+  setmetatable(cls, { __index = cls.__super })
+
   function cls:new(...)
     local instance = setmetatable({}, self)
     if instance.init then instance:init(...) end
     return instance
   end
   return cls
+end
+
+function M.interface(name, methods)
+  local self = {}
+  self.__name = name
+  self.__index = self
+  for _, method in ipairs(methods) do
+    self[method] = M.virtual(method)
+  end
+  return self
 end
 
 function M.virtual(name)

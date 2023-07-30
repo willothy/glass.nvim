@@ -177,32 +177,6 @@ function Window:animate(
   self.timer:start(0, delta_time, tick)
 end
 
----@return integer width
-function Window:get_width()
-  local width = api.nvim_win_get_width(self.winid)
-  self.width = width
-  return width
-end
-
----@return integer height
-function Window:get_height()
-  local height = api.nvim_win_get_height(self.winid)
-  self.height = height
-  return height
-end
-
----@param height integer
-function Window:set_width(width)
-  api.nvim_win_set_width(self.winid, width)
-  self.width = width
-end
-
----@param height integer
-function Window:set_height(height)
-  api.nvim_win_set_height(self.winid, height)
-  self.height = height
-end
-
 function Window:is_valid()
   local valid = api.nvim_win_is_valid(self.winid)
   -- perform window cleanup automatically if not valid
@@ -246,6 +220,32 @@ end
 
 function Window:set_option(name, val)
   vim.api.nvim_win_set_option(self.winid, name, val)
+end
+
+---@return integer width
+function Window:get_width()
+  local width = api.nvim_win_get_width(self.winid)
+  self.width = width
+  return width
+end
+
+---@return integer height
+function Window:get_height()
+  local height = api.nvim_win_get_height(self.winid)
+  self.height = height
+  return height
+end
+
+---@param height integer
+function Window:set_width(width)
+  api.nvim_win_set_width(self.winid, width)
+  self.width = width
+end
+
+---@param height integer
+function Window:set_height(height)
+  api.nvim_win_set_height(self.winid, height)
+  self.height = height
 end
 
 return Window
