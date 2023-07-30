@@ -10,6 +10,8 @@ Track, animate, move swap and resize windows with ease.
 
 - [ ] Window moving/swapping "modes" similar to WinShift
   - [ ] Multiselect - move/swap one window, or an entire frame all at once
+- [ ] Layout management
+  - [ ] Save and restore predefined layouts and sublayouts (neovim/neovim#24507)
 - [ ] Flexible autoresizing
   - [ ] Equalize all windows - like <kbd>_<C-w_></kbd><kbd>=</kbd>, but animated and automated
   - [ ] Maximize current window
