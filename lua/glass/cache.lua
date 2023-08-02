@@ -1,5 +1,6 @@
 local class = require("glass.object").class
 
+---@class Glass.Cache
 local Cache = class("Cache")
 
 function Cache:init()

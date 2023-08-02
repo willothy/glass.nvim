@@ -2,10 +2,10 @@ local object = require("glass.object")
 local interface = object.interface
 
 ---@class Glass.Sized
----@type fun(self: Sized, width: integer)
----@type fun(self: Sized, height: integer)
----@type fun(self: Sized): integer
----@type fun(self: Sized): integer
+---@field set_width fun(self: Sized, width: integer)
+---@field set_height fun(self: Sized, height: integer)
+---@field get_width fun(self: Sized): integer
+---@field get_height fun(self: Sized): integer
 ---Interface implemented by windows and frames.
 local Sized = interface("Sized", {
   "set_width",

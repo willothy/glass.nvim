@@ -1,23 +1,15 @@
-local iter = vim.iter
-
 local M = {}
 
-function M.layout_tree(frame)
-  local node = { type = frame[1] }
-  if node.type == "leaf" then
-    node.winid = frame[2]
-  else
-    iter(frame[2])
-      :map(M.layout_tree)
-      :enumerate()
-      :each(function(i, child)
-        node[i] = child
-      end)
-      :totable()
-  end
-  return node
-end
+-- Layout-related exports
+M.Window = require("glass.window")
+M.Frame = require("glass.frame")
 
+-- Miscellaneous / utility exports
+M.Cache = require("glass.cache")
 
+local anim = require("glass.animation")
+M.Animate = anim.Animate
+M.interpolate = anim.interpolate
+M.easing = anim.easing
 
 return M
