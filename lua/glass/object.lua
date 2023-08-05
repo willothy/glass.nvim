@@ -45,4 +45,22 @@ function M.virtual(name)
   end
 end
 
+function M.is_instance(obj, cls)
+  return getmetatable(obj) == cls
+end
+
+function M.inherits(obj, super)
+  for _, sup in ipairs(obj.__super) do
+    if sup == super then return true end
+  end
+  for _, sup in ipairs(obj.__super) do
+    if M.inherits(sup, super) then return true end
+  end
+  return false
+end
+
+function M.classname(obj)
+  return getmetatable(obj).__name
+end
+
 return M
