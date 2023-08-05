@@ -3,6 +3,8 @@ local class = require("glass.object").class
 
 local M = {}
 
+M.easing = {}
+
 function M.easing.linear(progress)
   return progress
 end
