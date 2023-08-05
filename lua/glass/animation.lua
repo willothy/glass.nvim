@@ -136,4 +136,6 @@ function Animate:is_animating()
   return self.timer ~= nil and self.timer:is_active()
 end
 
+M.Animate = Animate
+
 return M
