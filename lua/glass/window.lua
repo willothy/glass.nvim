@@ -1,7 +1,8 @@
 local api = vim.api
-local class = require("glass.object").class
-local Sized = require("glass.sized")
+local object = require("glass.object")
+local class, is_instance = object.class, object.is_instance
 local Cache = require("glass.cache")
+local Sized = require("glass.sized")
 local Animate = require("glass.animation").Animate
 
 local win_cache = Cache:new()
@@ -21,7 +22,9 @@ local win_cache = Cache:new()
 ---@field width integer
 ---@field height integer
 ---@field view Glass.View
+---@field parent Glass.Frame
 ---@field timer uv_timer_t
+---@field new fun(id: integer, parent: Glass.Frame): Glass.Window
 ---
 ---# Usage
 ---
@@ -34,14 +37,22 @@ local win_cache = Cache:new()
 ---```
 local Window = class("Window", Sized, Animate)
 
+function Window:__eq(other)
+  if type(other) == "number" then return self.winid == other end
+  if not is_instance(other, Window) then return false end
+  return self.winid == other.winid
+end
+
 ---@param id window
-function Window:init(id)
+---@param parent Glass.Frame
+function Window:init(id, parent)
   if not id then error("Window id must be provided") end
   if not api.nvim_win_is_valid(id) then
     error(("Window %s is not valid"):format(id))
   end
   self = win_cache:get_or_insert(id, function()
     self.winid = id
+    self.parent = parent
     self.timer = vim.loop.new_timer()
     return self
   end)
